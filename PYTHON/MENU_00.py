@@ -14,5 +14,10 @@ while x != 5:
     print('>>>>>>>> Qual é a sua opção?')
     x = int(input())
 
+    if x == 1:
+        soma = N1 + N2
+        print('A soma {} + {} é {}.'.format(N1, N2, soma))
+
+
 print('Fim do programa! Até breve!')
 
