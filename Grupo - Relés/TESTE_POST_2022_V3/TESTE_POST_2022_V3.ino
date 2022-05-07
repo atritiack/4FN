@@ -3,8 +3,11 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 
-const char* ssid = "Redmi7";
-const char* password = "Olever01";
+const char* ssid = "LG K11+_9730";
+const char* password = "12345678";
+
+// #define SSID "iPhone de André"
+// #define SSID_PASSWORD "bellabella1302"
 
 const char* serverName = "http://api.thingspeak.com/update";
 // Service API Key

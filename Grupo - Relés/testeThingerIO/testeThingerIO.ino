@@ -4,7 +4,7 @@
 #define USERNAME "williamolever"          //Informações do Thinger.io
 #define DEVICE_ID "ESP32TCC"
 #define DEVICE_CREDENTIAL "NHdQukqCXD0cPLVP"
-#define SSID "casadaIsabella_2G"
+#define SSID "iPhone de André"
 #define SSID_PASSWORD "bellabella1302"
 
 ThingerESP32 thing(USERNAME, DEVICE_ID, DEVICE_CREDENTIAL);
