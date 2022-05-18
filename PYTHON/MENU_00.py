@@ -1,3 +1,5 @@
+# Esta é a versão final do exercício do menu.
+
 N1 = int(input('Digite o primeiro número: '))
 N2 = int(input('Digite o segundo número: '))
 
