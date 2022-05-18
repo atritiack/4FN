@@ -18,7 +18,7 @@ void  setup() {
   pinMode (pir_sensor, INPUT);    // inicializa o sensor como entrada
   Serial.begin(115200);          // inicializa a série
 
-  sim800.begin(115200);
+  sim800.begin(19200);
   Serial.println(" SIM800L software inicializo");
 
   sim800.println("AT");
@@ -36,13 +36,13 @@ while(Serial.available()) {
   sim800.println(Serial.readString());
 }
 ////////////////////////////////////////////// _
-  int val = digitalRead(pir_sensor);  // lê o valor do sensor
-  if (val == HIGH) {                    // verifica se o sensor é HIGH
+  //int val = digitalRead(pir_sensor);  // lê o valor do sensor
+  //if (val == HIGH) {                    // verifica se o sensor é HIGH
     // estado = ALTO;
-    Serial. println ("Movimento detectado!");
-    Serial. println ("Ligando....");
-    delay (1000);
-    sim800. println ("ATD"+PHONE+";");
+    //Serial. println ("Movimento detectado!");
+    //Serial. println ("Ligando....");
+    //delay (1000);
+    sim800.println ("ATD"+PHONE+";");
     delay (20000); // atraso de 20 segundos
-  }
+  //}
 }

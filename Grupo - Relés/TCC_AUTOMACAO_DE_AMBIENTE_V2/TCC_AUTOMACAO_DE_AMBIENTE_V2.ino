@@ -122,6 +122,7 @@ delay(1500);
 // Conexão do ESP32 com a plataforma Thinger.io
 thing["Temperatura"] >> outputValue(t);
 thing["Umidade"] >> outputValue(h);
+
 thing.handle();
 delay(50);
 Serial.println(t);
