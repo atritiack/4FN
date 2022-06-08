@@ -11,8 +11,6 @@
 #define RL4 26
 #define RL5 27
 #define RL6 14
-#define RL7 12
-#define RL8 13
 
 #define DHTPIN 15
 #define DHTTYPE DHT11
@@ -23,10 +21,13 @@ DHT dht(DHTPIN, DHTTYPE);
 #define DEVICE_ID "ESP32TCC"
 #define DEVICE_CREDENTIAL "lUS9ZF9dp%sDKxBN"
 
-#define SSID "iPhone de André"      // Credenciais WiFi
-#define SSID_PASSWORD "bellabella1302"
-//#define SSID "LG K11+_9730"
-//#define SSID_PASSWORD "12345678"
+//#define SSID "iPhone de André"      // Credenciais WiFi
+//#define SSID_PASSWORD "bellabella1302"
+#define SSID "AndroidAP"
+#define SSID_PASSWORD "wxhj7021"
+
+//#define SSID "Redmi10"
+//#define SSID_PASSWORD "william01"
 
 LiquidCrystal_I2C lcd(0x27,16,2);  // set the LCD address to 0x27 for a 16 chars and 2 line display
 
@@ -43,17 +44,22 @@ void setup() {
   pinMode(RL4, OUTPUT);
   pinMode(RL5, OUTPUT);
   pinMode(RL6, OUTPUT);
-  pinMode(RL7, OUTPUT);
-  pinMode(RL8, OUTPUT);
   
+  digitalWrite(RL1, LOW);
+  digitalWrite(RL2, LOW);
+  digitalWrite(RL3, LOW);
+  digitalWrite(RL4, LOW);
+  digitalWrite(RL5, LOW);
+  digitalWrite(RL6, LOW);
+  delay(3000);
   digitalWrite(RL1, HIGH);
   digitalWrite(RL2, HIGH);
   digitalWrite(RL3, HIGH);
   digitalWrite(RL4, HIGH);
   digitalWrite(RL5, HIGH);
   digitalWrite(RL6, HIGH);
-  digitalWrite(RL7, HIGH);
-  digitalWrite(RL8, HIGH);
+  delay(3000);
+  
 
   dht.begin();
   lcd.init();                      
@@ -76,7 +82,7 @@ void loop() {
 }
 
 void comparaTempRL1(){
-  if(t > 28)
+  if(t > 28) 
     {
       digitalWrite(RL1, LOW);
       Serial.println("RELE 01 LIGADO");
@@ -97,6 +103,7 @@ void atualizaSensor(){
   h = dht.readHumidity();
   Serial.print("Umidade: ");
   Serial.println(h);
+  delay(1000);
 }
 
 
@@ -122,9 +129,13 @@ delay(1500);
 // Conexão do ESP32 com a plataforma Thinger.io
 thing["Temperatura"] >> outputValue(t);
 thing["Umidade"] >> outputValue(h);
-
+thing["RELE_02"] << digitalPin(RL2);
+thing["RELE_03"] << digitalPin(RL3);
+thing["RELE_04"] << digitalPin(RL4);
+thing["RELE_05"] << digitalPin(RL5);
 thing.handle();
-delay(50);
+delay(500);
+
 Serial.println(t);
 Serial.println(h);
 delay(100);
