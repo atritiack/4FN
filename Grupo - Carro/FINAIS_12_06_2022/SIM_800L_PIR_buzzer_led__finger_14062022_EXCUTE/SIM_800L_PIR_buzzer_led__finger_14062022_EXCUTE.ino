@@ -4,28 +4,29 @@
 // Parâmetros do Sensor Biométrico
 //*****************************************************************
 #include <Adafruit_Fingerprint.h>
-SoftwareSerial mySerial(10, 11); 
+SoftwareSerial mySerial(7, 8); 
 // Pinos do Sensor Biométrico
 // Arduino -->  Sensor
-//    11   -->    RX
-//    10   -->    TX 
+//    8    -->   RX
+//    7   -->    TX 
 Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
-uint8_t id;
+
 //******************************************************************
 
 // Número do telefone do receptor do alarme com código do país
 const String PHONE = "+5511982405573";
 
+
 // pino RX do módulo GSM para Arduino 3
 // pino TX do módulo GSM para Arduino 2
-# define  rxPin  2
-# define  txPin  3
+#define  rxPin  2
+#define  txPin  3
 SoftwareSerial sim800(rxPin,txPin);
 
 // Definição dos pinos:
 #define TRAVA 4
 #define MODO 5
-#define PIR 8
+#define PIR 10
 #define BUZZER 12
 #define LED 13
 
@@ -109,7 +110,9 @@ void  loop(){
 
 void modoNormal(){
   Serial.println("Modo Normal, aguardando biometria");
+  mySerial.listen();
   getFingerprintID();
+  delay(50);
   int idEncontrado = finger.fingerID;
   if(idEncontrado == 100){
     Serial.println("Liberado :-) !!!!");
@@ -128,11 +131,12 @@ void modoNormal(){
     Serial.println("");
     delay(2000);
   }
-  delay(50);
+
 }
 
 void modoAlarme()
 {
+sim800.listen();  
 ////////////////////////////////////////////// _
 while(sim800.available()){
   Serial.println(sim800.readString());
@@ -142,6 +146,7 @@ while(Serial.available()) {
   sim800.println(Serial.readString());
 }
 ////////////////////////////////////////////// _
+
  int valorPIR = digitalRead(PIR);
   if (valorPIR == HIGH) { // verifica se o sensor é HIGH // estado = ALTO;
     Serial.println ("Movimento detectado!");
@@ -152,6 +157,7 @@ while(Serial.available()) {
     vezes = 10;
     alarme();
     }
+  else Serial.println("PIR desativado...");
 }    
 
 void alarme(){
